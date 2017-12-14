@@ -214,6 +214,11 @@ class StreamDispatcher extends VolumeInterface {
         return;
       }
 
+      if (data.timestamp > Math.pow(2, 32)) {
+        this.destroy('end', 'Stream timestamp is out of bounds.');
+        return;
+      }
+
       if (this.paused) {
         this.setSpeaking(false);
         // Old code?
